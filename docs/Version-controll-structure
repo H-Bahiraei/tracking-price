@@ -1,0 +1,31 @@
+PO:
+-	Create Upstream and define some tasks
+-	Clone on local (git clone git@github.com:H-Bahiraei/tracking-price.git) , cd
+-	Git flow init (git flow init)
+-	Push dev to origin (git push --set-upstream origin development)
+
+
+Developer:
+-	Clone on local and Git flow init (git flow init)
+-	Pull (origin to local: Dev)
+-	Create f1: (git flow feature start Initializing-Spring-Boot) by bash
+-	Do changes (Intellij: Initialize SpringBoot on that folder)
+-	Add and commit on local f1 by intellij- msg: closes #task_number
+-	Pull (origin to local: Dev)
+-	git log --oneline --graph –all
+-	Rebase local Dev to f1 (git rebase development) by bash
+-	git log --oneline --graph –all
+-	Finish f1 (git flow feature finish Initializing-Spring-Boot) (auto merge to local dev) by bash
+-	Push Local dev to origin. By intellij or bash
+
+PO:
+-	pull origin dev and master
+-	Start release1
+-	Push release1
+-	Test and sonar on r1
+-	Corrections on r1 by a developer and push to origin
+-	PO: Pull r1
+-	Finish r1 V1 (dev and master are updated)
+-	Push Dev and master(v1) to origin
+-	Start Jenkins...
+

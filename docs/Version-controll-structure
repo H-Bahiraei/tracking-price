@@ -19,11 +19,11 @@ Developer:
 -	Push Local dev to origin. By intellij or bash
 
 PO:
--	pull origin dev and master
--	Start release1
--	Push release1
+-	pull origin dev (git pull origin development) and master (git pull --rebase origin main)
+-	Start release1 (git flow release start '0.0')
+-	Push release1 (git push --set-upstream origin release/0.0)
 -	Test and sonar on r1
--	Corrections on r1 by a developer and push to origin
+-	Corrections: by developer: pull dev, create r1, do changes, commit and push origin r1
 -	PO: Pull r1
 -	Finish r1 V1 (dev and master are updated)
 -	Push Dev and master(v1) to origin

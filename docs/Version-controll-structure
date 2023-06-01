@@ -27,6 +27,6 @@ PO:
 -	PO: Pull r1
 -	Finish: git flow release finish '0.0' (msg: closes #task_number)(dev and master local are updated)
 -	Push Dev and master(first time) and tag to origin (git push origin v.0.0)
--	Open a pull request for tag (msg: closes #task_number) (is it nedded?!!!)
+-	Open a pull request for tag (msg: closes #task_number) (is it nedded?!!)
 -	Start Jenkins...
 

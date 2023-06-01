@@ -10,6 +10,9 @@ Developer:
 -	Pull (origin to local: Dev)
 -	Create f1: (git flow feature start Initializing-Spring-Boot) by bash
 -	Do changes (Intellij: Initialize SpringBoot on that folder)
+-   without commits, files are seen in all feature branches
+-   for finish a feature branch, we must don't have any uncommitted file. so we try Commit all files into their branches end of a day.
+-   we can divide a big task into some small feature branch to have changes on develop (local and origin)
 -	Add and commit on local f1 by intellij- msg: closes #task_number
 -	Pull (origin to local: Dev)
 -	git log --oneline --graph –all

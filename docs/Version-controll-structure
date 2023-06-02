@@ -9,13 +9,14 @@ Developer:
 -	Clone on local and Git flow init (git flow init)
 -	Pull (origin to local: Dev)
 -	Create f1: (git flow feature start Improving-git-plan) by bash
--	Do changes (Intellij: Initialize SpringBoot on that folder)
+-	Do changes
 -   without commits, files are seen in all feature branches
 -   for finish a feature branch, we must don't have any uncommitted file. so we try Commit all files into their
         branches end of a day.
 -   we can divide a big( or permanent) task into some small feature branch, and finish them early,
         so we can have changes on develop (local and origin)
--	Add and commit on local f1 by intellij- msg: closes #task_number
+-	Add commits on local f1 by intellij- msg: closes #task_number
+-   Combining commits: git rebase -i HEAD~5
 -	Pull (origin to local: Dev)
 -	git log --oneline --graph –all
 -	Rebase local Dev to f1 (git rebase development) by bash

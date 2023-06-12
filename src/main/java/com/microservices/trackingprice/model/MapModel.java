@@ -27,11 +27,9 @@ public abstract class MapModel<K1 extends BaseEntity, K2 extends Long, V extends
 
 
     // new record to HashMap
-    protected Boolean hasK1(K1 k1) {
-        return this.containsKey(k1);
-    }
+    protected abstract Boolean hasK1(K1 k1);
 
-    protected void insertNewRecordToHashMap(K1 k1, K2 k2, V v) {
+    public void insertNewRecordToHashMap(K1 k1, K2 k2, V v) {
         this.putNewRecordToHashMap(k1, this.createNewLinkedHashMapWithKeyAndValue(
                 k2, this.createNewLinkedListWithValue(v)));
     }

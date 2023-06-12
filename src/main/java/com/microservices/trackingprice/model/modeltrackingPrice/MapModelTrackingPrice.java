@@ -16,9 +16,9 @@ public class MapModelTrackingPrice extends MapModel<Instrument, Long, Price> {
     public static void main(String[] args) {
         MapModelTrackingPrice mapModelTrackingPrice = new MapModelTrackingPrice(); // TODO create obj by Spring Framework (IOC,DI)
         List<List<Object>> inputList = new ArrayList<>();
-        Collections.addAll(inputList, Arrays.asList(new Instrument("Dollar"), 234234L, new Price("55000")));
-        Collections.addAll(inputList, Arrays.asList(new Instrument("Euro"), 234234L, new Price("60000")));
-        Collections.addAll(inputList, Arrays.asList(new Instrument("Dollar"), 234234L, new Price("56000")));
+        Collections.addAll(inputList, Arrays.asList(new Instrument("Bitcoin"), 234234L, new Price("55000")));
+        Collections.addAll(inputList, Arrays.asList(new Instrument("Ethereum"), 234234L, new Price("60000")));
+        Collections.addAll(inputList, Arrays.asList(new Instrument("Bitcoin"), 234234L, new Price("56000")));
 
         for (List<Object> inner : inputList) {
             if (!mapModelTrackingPrice.hasK1((Instrument) inner.get(0))) {
@@ -37,17 +37,27 @@ public class MapModelTrackingPrice extends MapModel<Instrument, Long, Price> {
 
     @Override
     protected void putNewRecordToHashMap(Instrument instrument, Map<Long, List<Price>> linkedHashMapValue) {
-        this.put(instrument, linkedHashMapValue); //ToDo
+        this.put(instrument, linkedHashMapValue);
 
     }
 
 
     @Override
     protected List<Price> hasK1K2(Instrument instrument, Long date) {
-        Map<Long, List<Price>> linkedHashMapValue = this.get(instrument);
-        return linkedHashMapValue.containsKey(date) ? linkedHashMapValue.get(date) : new LinkedList<>();
+        Optional<Map<Long, List<Price>>> linkedHashMapValue = Optional.ofNullable(this.get(instrument));
+        if (linkedHashMapValue.isPresent() && linkedHashMapValue.get().containsKey(date)) { // TODO ifPresent?
+            return linkedHashMapValue.get().get(date);
+        }
+        return new LinkedList<>();
+
+
     }
 
+
+    @Override
+    protected Boolean hasK1(Instrument instrument) {
+        return this.containsKey(instrument);
+    }
 
     @Override
     protected List<Price> createNewLinkedListWithValue(Price price) {

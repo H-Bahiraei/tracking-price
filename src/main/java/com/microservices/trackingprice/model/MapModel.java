@@ -48,7 +48,7 @@ public abstract class MapModel<K1 extends BaseEntity, K2 extends Long, V extends
     protected abstract void addingNewVToLinkedList(List<V> linkedListValue, V v);
 
     /*
-    For adding new date-price
+     For adding new date-price
      */
     public abstract List<V> addingNewRecordToExistingLinkedHashMap(Map<K2, List<V>> linkedHashMap, K2 k2, V v);
 

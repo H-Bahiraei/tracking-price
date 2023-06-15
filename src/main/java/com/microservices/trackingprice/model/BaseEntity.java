@@ -17,7 +17,7 @@ import java.io.Serializable;
 //@MappedSuperclass
 public class BaseEntity implements Serializable {
 
-    public String payload = "";
+    public String payload = ""; // TODO override toString()
 
     public BaseEntity(String payload) {
         this.payload = payload;

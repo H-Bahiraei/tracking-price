@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * @project tracking-price
  * &
  */
-class MapModelTrackingPriceUnitTest {
+class MapModelTrackingPriceUnitTest { // TODO review
 
 
     MapModelTrackingPrice mapModelTrackingPrice;
@@ -46,15 +46,15 @@ class MapModelTrackingPriceUnitTest {
         Instrument instrument_not_having = new Instrument("not_having");
         Instrument instrument_bitcoin = new Instrument("Bitcoin");
         // then
-        assertEquals(mapModelTrackingPrice.hasK1(instrument_not_having), false);
+        assertEquals(mapModelTrackingPrice.hasK1AndGetLinkedHashMap(instrument_not_having), false);
 
 
         //given
         mapModelTrackingPrice.insertNewRecordToHashMap((Instrument) inputList.get(0).get(0),
                 (Long) inputList.get(0).get(1), (Price) inputList.get(0).get(2));
         // then
-        assertEquals(mapModelTrackingPrice.hasK1(instrument_bitcoin), true);
-        assertEquals(mapModelTrackingPrice.hasK1(instrument_not_having), false);
+        assertEquals(mapModelTrackingPrice.hasK1AndGetLinkedHashMap(instrument_bitcoin), true);
+        assertEquals(mapModelTrackingPrice.hasK1AndGetLinkedHashMap(instrument_not_having), false);
     }
 
     @Test
@@ -101,13 +101,13 @@ class MapModelTrackingPriceUnitTest {
                 (Long) inputList.get(0).get(1), (Price) inputList.get(0).get(2));
 
         // then
-        assertEquals(mapModelTrackingPrice.hasK1K2((Instrument) inputList.get(1).get(0), (Long) inputList.get(1).get(1)).
+        assertEquals(mapModelTrackingPrice.hasK1K2AndGetLinkedList((Instrument) inputList.get(1).get(0), (Long) inputList.get(1).get(1)).
                 size(), 0);
-        assertEquals(mapModelTrackingPrice.hasK1K2((Instrument) inputList.get(0).get(0), (Long) inputList.get(1).get(1)).
+        assertEquals(mapModelTrackingPrice.hasK1K2AndGetLinkedList((Instrument) inputList.get(0).get(0), (Long) inputList.get(1).get(1)).
                 size(), 0);
-        assertEquals(mapModelTrackingPrice.hasK1K2((Instrument) inputList.get(1).get(0), (Long) inputList.get(0).get(1)).
+        assertEquals(mapModelTrackingPrice.hasK1K2AndGetLinkedList((Instrument) inputList.get(1).get(0), (Long) inputList.get(0).get(1)).
                 size(), 0);
-        assertEquals(mapModelTrackingPrice.hasK1K2((Instrument) inputList.get(0).get(0), (Long) inputList.get(0).get(1)).
+        assertEquals(mapModelTrackingPrice.hasK1K2AndGetLinkedList((Instrument) inputList.get(0).get(0), (Long) inputList.get(0).get(1)).
                 size(), 1);
 
 
@@ -118,7 +118,7 @@ class MapModelTrackingPriceUnitTest {
         //given
         mapModelTrackingPrice.insertNewRecordToHashMap((Instrument) inputList.get(0).get(0),
                 (Long) inputList.get(0).get(1), (Price) inputList.get(0).get(2));
-        List<Price> prices = mapModelTrackingPrice.hasK1K2((Instrument) inputList.get(0).get(0),
+        List<Price> prices = mapModelTrackingPrice.hasK1K2AndGetLinkedList((Instrument) inputList.get(0).get(0),
                 (Long) inputList.get(0).get(1));
         // then
         assertEquals((mapModelTrackingPrice.get((Instrument) inputList.get(0).get(0)).get((Long) inputList.get(0).get(1))

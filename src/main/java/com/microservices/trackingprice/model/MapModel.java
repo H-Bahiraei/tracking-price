@@ -1,7 +1,5 @@
 package com.microservices.trackingprice.model;
 
-import com.microservices.trackingprice.model.modeltrackingPrice.Price;
-
 import java.io.Serializable;
 import java.util.*;
 import java.util.function.BiConsumer;
@@ -23,11 +21,12 @@ import java.util.function.BiFunction;
  */
 public abstract class MapModel<K1 extends BaseEntity, K2 extends Long, V extends BaseEntity> implements Serializable {
 
-    protected Map<K1, Map<Long, List<Price>>> mapData = new HashMap<>(); // diamond operator // Scope IOC: one obj
+    public Map<K1, Map<K2, List<V>>> mapData = new HashMap<>(); // diamond operator // Scope IOC: one obj //ToDo get all // TODO ConcurrentHashMap
 
-
-    // new record to HashMap
-    protected abstract Boolean hasK1(K1 k1);
+    /*
+     Adding new record to HashMap
+     */
+    protected abstract Map<K2, List<V>> hasK1AndGetLinkedHashMap(K1 k1);
 
     public void insertNewRecordToHashMap(K1 k1, K2 k2, V v) {
         this.putNewRecordToHashMap(k1, this.createNewLinkedHashMapWithKeyAndValue(
@@ -36,20 +35,27 @@ public abstract class MapModel<K1 extends BaseEntity, K2 extends Long, V extends
 
     protected abstract List<V> createNewLinkedListWithValue(V v);
 
-    protected abstract Map<K2, List<V>> createNewLinkedHashMapWithKeyAndValue(
-            K2 alongKey, List<V> linkedListValue);
+    public abstract Map<K2, List<V>> createNewLinkedHashMapWithKeyAndValue(K2 alongKey, List<V> linkedListValue);
 
     protected abstract void putNewRecordToHashMap(K1 k1, Map<K2, List<V>> linkedHashMapValue);
 
 
-    // New Price
-    protected abstract List<V> hasK1K2(K1 k1, K2 k2);
+    /*
+    For adding new price
+    */
+    protected abstract List<V> hasK1K2AndGetLinkedList(K1 k1, K2 k2);
 
     protected abstract void addingNewVToLinkedList(List<V> linkedListValue, V v);
 
+    /*
+     For adding new date-price
+     */
+    public abstract List<V> addingNewRecordToExistingLinkedHashMap(Map<K2, List<V>> linkedHashMap, K2 k2, V v);
 
-///////////// MAP
-
+    /*
+     * Dandelion Map
+     * @return
+     */
     public int size() {
         return mapData.size();
     }
@@ -66,19 +72,19 @@ public abstract class MapModel<K1 extends BaseEntity, K2 extends Long, V extends
         return mapData.containsValue(value);
     }
 
-    public Map<Long, List<Price>> get(Object key) {
+    public Map<K2, List<V>> get(Object key) {
         return mapData.get(key);
     }
 
-    public Map<Long, List<Price>> put(K1 key, Map<Long, List<Price>> value) {
+    public Map<K2, List<V>> put(K1 key, Map<K2, List<V>> value) {
         return mapData.put(key, value);
     }
 
-    public Map<Long, List<Price>> remove(Object key) {
+    public Map<K2, List<V>> remove(Object key) {
         return mapData.remove(key);
     }
 
-//    public void putAll(@org.jetbrains.annotations.NotNull Map<? extends K1, ? extends LinkedHashMap<K2, LinkedList<V>>> m) {
+//    public void putAll(@org.jetbrains.annotations.NotNull Map<? extends K1, ? extends Map<K2, List<V>>> m) {
 //        mapData.putAll(m);
 //    }
 
@@ -90,11 +96,11 @@ public abstract class MapModel<K1 extends BaseEntity, K2 extends Long, V extends
         return mapData.keySet();
     }
 
-    public Collection<Map<Long, List<Price>>> values() {
+    public Collection<Map<K2, List<V>>> values() {
         return mapData.values();
     }
 
-    public Set<Map.Entry<K1, Map<Long, List<Price>>>> entrySet() {
+    public Set<Map.Entry<K1, Map<K2, List<V>>>> entrySet() {
         return mapData.entrySet();
     }
 
@@ -108,19 +114,19 @@ public abstract class MapModel<K1 extends BaseEntity, K2 extends Long, V extends
         return mapData.hashCode();
     }
 
-    public Map<Long, List<Price>> getOrDefault(Object key, LinkedHashMap<Long, List<Price>> defaultValue) {
+    public Map<K2, List<V>> getOrDefault(Object key, Map<K2, List<V>> defaultValue) {
         return mapData.getOrDefault(key, defaultValue);
     }
 
-    public void forEach(BiConsumer<K1, Map<Long, List<Price>>> action) {
+    public void forEach(BiConsumer<? super K1, ? super Map<K2, List<V>>> action) {
         mapData.forEach(action);
     }
 
-    public void replaceAll(BiFunction<K1, Map<Long, List<Price>>, Map<Long, List<Price>>> function) {
+    public void replaceAll(BiFunction<? super K1, ? super Map<K2, List<V>>, ? extends Map<K2, List<V>>> function) {
         mapData.replaceAll(function);
     }
 
-    public Map<Long, List<Price>> putIfAbsent(K1 key, LinkedHashMap<Long, List<Price>> value) {
+    public Map<K2, List<V>> putIfAbsent(K1 key, Map<K2, List<V>> value) {
         return mapData.putIfAbsent(key, value);
     }
 
@@ -128,84 +134,28 @@ public abstract class MapModel<K1 extends BaseEntity, K2 extends Long, V extends
         return mapData.remove(key, value);
     }
 
-    public boolean replace(K1 key, LinkedHashMap<Long, List<Price>> oldValue, LinkedHashMap<Long, List<Price>> newValue) {
+    public boolean replace(K1 key, Map<K2, List<V>> oldValue, Map<K2, List<V>> newValue) {
         return mapData.replace(key, oldValue, newValue);
     }
 
-    public Map<Long, List<Price>> replace(K1 key, LinkedHashMap<Long, List<Price>> value) {
+    public Map<K2, List<V>> replace(K1 key, Map<K2, List<V>> value) {
         return mapData.replace(key, value);
     }
 
-//    public LinkedHashMap<K2, LinkedList<V>> computeIfAbsent(K1 key, @org.jetbrains.annotations.NotNull Function<? super K1, ? extends LinkedHashMap<K2, LinkedList<V>>> mappingFunction) {
+
+//    public Map<K2, List<V>> computeIfAbsent(K1 key, @org.jetbrains.annotations.NotNull Function<? super K1, ? extends Map<K2, List<V>>> mappingFunction) {
 //        return mapData.computeIfAbsent(key, mappingFunction);
 //    }
 //
-//    public LinkedHashMap<K2, LinkedList<V>> computeIfPresent(K1 key, @org.jetbrains.annotations.NotNull BiFunction<? super K1, ? super LinkedHashMap<K2, LinkedList<V>>, ? extends LinkedHashMap<K2, LinkedList<V>>> remappingFunction) {
+//    public Map<K2, List<V>> computeIfPresent(K1 key, @org.jetbrains.annotations.NotNull BiFunction<? super K1, ? super Map<K2, List<V>>, ? extends Map<K2, List<V>>> remappingFunction) {
 //        return mapData.computeIfPresent(key, remappingFunction);
 //    }
 //
-//    public LinkedHashMap<K2, LinkedList<V>> compute(K1 key, @org.jetbrains.annotations.NotNull BiFunction<? super K1, ? super LinkedHashMap<K2, LinkedList<V>>, ? extends LinkedHashMap<K2, LinkedList<V>>> remappingFunction) {
+//    public Map<K2, List<V>> compute(K1 key, @org.jetbrains.annotations.NotNull BiFunction<? super K1, ? super Map<K2, List<V>>, ? extends Map<K2, List<V>>> remappingFunction) {
 //        return mapData.compute(key, remappingFunction);
 //    }
 //
-//    public LinkedHashMap<K2, LinkedList<V>> merge(K1 key, @org.jetbrains.annotations.NotNull LinkedHashMap<K2, LinkedList<V>> value, @org.jetbrains.annotations.NotNull BiFunction<? super LinkedHashMap<K2, LinkedList<V>>, ? super LinkedHashMap<K2, LinkedList<V>>, ? extends LinkedHashMap<K2, LinkedList<V>>> remappingFunction) {
+//    public Map<K2, List<V>> merge(K1 key, @org.jetbrains.annotations.NotNull Map<K2, List<V>> value, @org.jetbrains.annotations.NotNull BiFunction<? super Map<K2, List<V>>, ? super Map<K2, List<V>>, ? extends Map<K2, List<V>>> remappingFunction) {
 //        return mapData.merge(key, value, remappingFunction);
 //    }
-
-    public static <K, V> Map<K, V> of() {
-        return Map.of();
-    }
-
-    public static <K, V> Map<K, V> of(K k1, V v1) {
-        return Map.of(k1, v1);
-    }
-
-    public static <K, V> Map<K, V> of(K k1, V v1, K k2, V v2) {
-        return Map.of(k1, v1, k2, v2);
-    }
-
-    public static <K, V> Map<K, V> of(K k1, V v1, K k2, V v2, K k3, V v3) {
-        return Map.of(k1, v1, k2, v2, k3, v3);
-    }
-
-    public static <K, V> Map<K, V> of(K k1, V v1, K k2, V v2, K k3, V v3, K k4, V v4) {
-        return Map.of(k1, v1, k2, v2, k3, v3, k4, v4);
-    }
-
-    public static <K, V> Map<K, V> of(K k1, V v1, K k2, V v2, K k3, V v3, K k4, V v4, K k5, V v5) {
-        return Map.of(k1, v1, k2, v2, k3, v3, k4, v4, k5, v5);
-    }
-
-    public static <K, V> Map<K, V> of(K k1, V v1, K k2, V v2, K k3, V v3, K k4, V v4, K k5, V v5, K k6, V v6) {
-        return Map.of(k1, v1, k2, v2, k3, v3, k4, v4, k5, v5, k6, v6);
-    }
-
-    public static <K, V> Map<K, V> of(K k1, V v1, K k2, V v2, K k3, V v3, K k4, V v4, K k5, V v5, K k6, V v6, K k7, V v7) {
-        return Map.of(k1, v1, k2, v2, k3, v3, k4, v4, k5, v5, k6, v6, k7, v7);
-    }
-
-    public static <K, V> Map<K, V> of(K k1, V v1, K k2, V v2, K k3, V v3, K k4, V v4, K k5, V v5, K k6, V v6, K k7, V v7, K k8, V v8) {
-        return Map.of(k1, v1, k2, v2, k3, v3, k4, v4, k5, v5, k6, v6, k7, v7, k8, v8);
-    }
-
-    public static <K, V> Map<K, V> of(K k1, V v1, K k2, V v2, K k3, V v3, K k4, V v4, K k5, V v5, K k6, V v6, K k7, V v7, K k8, V v8, K k9, V v9) {
-        return Map.of(k1, v1, k2, v2, k3, v3, k4, v4, k5, v5, k6, v6, k7, v7, k8, v8, k9, v9);
-    }
-
-    public static <K, V> Map<K, V> of(K k1, V v1, K k2, V v2, K k3, V v3, K k4, V v4, K k5, V v5, K k6, V v6, K k7, V v7, K k8, V v8, K k9, V v9, K k10, V v10) {
-        return Map.of(k1, v1, k2, v2, k3, v3, k4, v4, k5, v5, k6, v6, k7, v7, k8, v8, k9, v9, k10, v10);
-    }
-
-    @SafeVarargs
-    public static <K, V> Map<K, V> ofEntries(Map.Entry<? extends K, ? extends V>... entries) {
-        return Map.ofEntries(entries);
-    }
-
-    public static <K, V> Map.Entry<K, V> entry(K k, V v) {
-        return Map.entry(k, v);
-    }
-
-    public static <K, V> Map<K, V> copyOf(Map<? extends K, ? extends V> map) {
-        return Map.copyOf(map);
-    }
 }

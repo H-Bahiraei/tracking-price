@@ -1,0 +1,185 @@
+{
+  "info": {
+    "_postman_id": "c93450e6-f458-4ea2-ac2f-ca41ba5bd0a3",
+    "name": "insert",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "19998047",
+    "_collection_link": "https://www.postman.com/grey-shuttle-390633/workspace/trackingprice/collection/19998047-c93450e6-f458-4ea2-ac2f-ca41ba5bd0a3?action=share&creator=19998047&source=collection_link"
+  },
+  "item": [
+    {
+      "name": "insert1",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"mapData\": {\r\n    \"Bitcoin\": {\r\n      \"111111\": [\r\n        \"55000\",\"56000\"\r\n      ]\r\n    }\r\n  }\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/trackingprice/write",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "trackingprice",
+            "write"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "insert2",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"mapData\": {\r\n    \"Bitcoin\": {\r\n      \"111111\": [\r\n        \"57000\"\r\n      ]\r\n    }\r\n  }\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/trackingprice/write",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "trackingprice",
+            "write"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "insert3",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"mapData\": {\r\n    \"Bitcoin\": {\r\n      \"999999\": [\r\n        \"64000\",\r\n        \"65000\"\r\n      ],\r\n      \"10101010\": [\r\n        \"66000\"\r\n      ]\r\n    },\r\n    \"Tether\": {\r\n      \"666666\": [\r\n        \"30000\",\r\n        \"31000\"\r\n      ]\r\n    }\r\n  }\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/trackingprice/write",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "trackingprice",
+            "write"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "insert4",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"mapData\": {\r\n    \"Bitcoin\": {\r\n      \"333333\": [\r\n        \"59000\"\r\n      ]\r\n    }\r\n  }\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/trackingprice/write",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "trackingprice",
+            "write"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "insert5",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"mapData\": {\r\n    \"Ethereum\": {\r\n      \"111111\": [\r\n        \"42000\"\r\n      ]\r\n    }\r\n  }\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/trackingprice/write",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "trackingprice",
+            "write"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "insert6",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"mapData\": {\r\n    \"Ethereum\": {\r\n      \"111111\": [\r\n        \"43000\",\"44000\"\r\n      ]\r\n    }\r\n  }\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/trackingprice/write",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "trackingprice",
+            "write"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}

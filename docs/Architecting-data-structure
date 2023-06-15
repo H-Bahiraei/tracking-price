@@ -1,0 +1,53 @@
+We want to design a Data Structure for this data:
+x-->
+    date1 --> price1, price2
+    date2 --> price1, price2
+
+I start with considering simplest situation and complex it step by step:
+
+
+k1 --> v1
+k2 --> v2
+            Map<String,String>
+-------------------------------------------------------------------------------
+k1 --> v1, v2
+k2 --> v1, v2
+                Map < String, List<String> >
+-------------------------------------------------------------------------------
+
+x-->
+    date1 --> price1
+    date2 --> price2
+                        Map<String, Map<Date,Price> >
+-------------------------------------------------------------------------------
+x-->
+    date1 --> price1, price2
+    date2 --> price1, price2
+
+                       " Map< String, Map<Date,List<Price>> > "
+And this Data Structure is what I want.
+-------------------------------------------------------------------------------
+
+Now I should demonstrate what kind of Maps and List is appropriate for our system.
+
+-- Inner Map:
+We have many insert in inner Map, so ConcurrentHashMap is not a good choice.(of course in this project I want to handel thread safety by myself)
+We have many Get-keys operation from inner Map,
+    so it’s better that it has had sorted keys(TreeMap or LinkedHashMap).
+    TreeMap Sorts based on Compare, and LinkedHashMap sorts based on Insertion,
+    while TreeMap has O(Logn) because of overhead, and LinkedHashMap has O(1) for most Operations.
+    Customer in this System just want the latest Price, so only fetch is for latest Price,
+    and if we use LinkedHashMap, the Latest Price is in the one of the tail nodes probably,
+    and finding it is easy for LinkedHashMap.
+    So "LinkedHashMap" is better than TreeMap,
+    because of the lower BigO and it does’t have overhead for sorting by comparing.
+
+-- List
+We have very much adding and gettingAll operations from List,
+    so ArrayList is not good because of adding is costly in it,
+    and "LinkedList" is a good choice, because it has low cost for adding and getAll is O(1) for it.
+
+-- Outer Map
+We have reasonable insertions and fetching operations in outer Map,
+    so we can use "HashMap", because of low BigO.
+

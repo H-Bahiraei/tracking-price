@@ -3,19 +3,25 @@ PO:
 -	Clone on local (git clone git@github.com:H-Bahiraei/tracking-price.git) , cd
 -	Git flow init (git flow init)
 -	Push dev to origin (git push --set-upstream origin development)
-
+-   define small tasks for a small features
 
 Developer:
 -	Clone on local and Git flow init (git flow init)
 -	Pull (origin to local: Dev)
--	Create f1: (git flow feature start Initializing-Spring-Boot) by bash
--	Do changes (Intellij: Initialize SpringBoot on that folder)
--	Add and commit on local f1 by intellij- msg: closes #task_number
+-	Create f1: (git flow feature start Improving-git-plan) by bash
+-	Do changes
+-   without commits, files are seen in all feature branches
+-   for finish a feature branch, we must don't have any uncommitted file. so we try Commit all files into their
+        branches end of a day.
+-   we can divide a big( or permanent) task into some small feature branch, and finish them early,
+        so we can have changes on develop (local and origin)
+-	Add commits on local f1 by intellij- msg: closes #task_number
+-   Combining commits: git rebase -i HEAD~5
 -	Pull (origin to local: Dev)
 -	git log --oneline --graph –all
 -	Rebase local Dev to f1 (git rebase development) by bash
 -	git log --oneline --graph –all
--	Finish f1 (git flow feature finish Initializing-Spring-Boot) (auto merge to local dev) by bash
+-	Finish f1 (git flow feature finish Improving-git-plan) (auto merge to local dev) by bash
 -	Push Local dev to origin. By intellij or bash
 
 PO:
@@ -25,7 +31,8 @@ PO:
 -	Test and sonar on r1
 -	Corrections: by developer: pull dev, create r1, do changes, commit and push origin r1
 -	PO: Pull r1
--	Finish r1 V1 (dev and master are updated)
--	Push Dev and master(v1) to origin
+-	Finish: git flow release finish '0.0' (msg: closes #task_number)(dev and master local are updated)
+-	Push Dev and master(first time) and tag to origin (git push origin v.0.0)
+-	Open a pull request for tag (msg: closes #task_number) (is it nedded?!!)
 -	Start Jenkins...
 

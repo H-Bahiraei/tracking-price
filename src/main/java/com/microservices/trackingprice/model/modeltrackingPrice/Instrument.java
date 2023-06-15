@@ -16,7 +16,6 @@ import lombok.Setter;
 @Setter
 @Getter
 public class Instrument extends BaseEntity {
-
     public Instrument(String payload) {
         super(payload);
     }
